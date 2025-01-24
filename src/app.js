@@ -12,7 +12,7 @@ const app = express();
 app.use(cors({
     origin: '*', // Permitir apenas esse domínio
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
-    credentials: true, // Permite envio de cookies, se necessário
+    allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
   }));
 
 app.use(bodyParser.json());
