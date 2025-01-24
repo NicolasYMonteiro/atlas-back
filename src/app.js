@@ -9,7 +9,11 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://atlasdesenvolvimento.vercel.app', // Permitir apenas esse domínio
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+    credentials: true, // Permite envio de cookies, se necessário
+  }));
 
 app.use(bodyParser.json());
 
