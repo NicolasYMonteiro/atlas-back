@@ -14,8 +14,16 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
 }));
 
-app.options('*', cors()); // Responde automaticamente às preflight requests
-
+// Middleware para lidar com solicitações preflight (OPTIONS)
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://atlasdevelopment.vercel.app');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(204); // Envia uma resposta vazia para preflight requests
+    }
+    next();
+});
 app.use(bodyParser.json());
 
 app.use(routerUser);
