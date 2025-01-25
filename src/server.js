@@ -1,11 +1,11 @@
-import { listen } from './app';
-import { config } from "dotenv";
+const app = require('./app');
+const dotenv = require("dotenv");
 
 // Carrega variáveis de ambiente do arquivo .env
-config();
+dotenv.config();
 
 const PORT = process.env.PORT || 8080;
 
-listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
 });

@@ -1,10 +1,10 @@
-import express from 'express';
-import { json } from 'body-parser';
-import cors from 'cors';
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-import routerUser from './Routes/routerUser';
-import routerTask from './Routes/routerTask';
-import routerSubTask from './Routes/routerSubTask';
+const routerUser = require('./Routes/routerUser');
+const routerTask = require('./Routes/routerTask');
+const routerSubTask = require('./Routes/routerSubTask')
 
 const app = express();
 
@@ -24,11 +24,11 @@ app.use((req, res, next) => {
     }
     next();
 });
-app.use(json());
+app.use(bodyParser.json());
 
 app.use(routerUser);
 app.use(routerTask);
 app.use(routerSubTask);
 
 
-export default app;
+module.exports = app;
