@@ -5,12 +5,10 @@ const routerTask = require('./Routes/routerTask');
 const routerSubTask = require('./Routes/routerSubTask')
 
 const cors = require('cors');
-
-
 const app = express();
 
 app.use(cors({
-    origin: '*', // Permitir apenas esse domínio
+    origin: 'https://atlasdevelopment.vercel.app', // Permitir apenas esse domínio
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
     allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
   }));
