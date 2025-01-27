@@ -15,7 +15,7 @@ const testConnection = async () => {
         await connection.query('SELECT 1'); // Realiza uma consulta de teste
         console.log('Conexão com o banco de dados estabelecida com sucesso!');
     } catch (error) {
-        console.error('Erro ao conectar ao banco de dados:', error.message);
+        console.error('Erro ao conectar ao banco de dados:', error.messagez);
     }
 };
 
