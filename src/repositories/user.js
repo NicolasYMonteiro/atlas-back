@@ -31,11 +31,12 @@ const deleteUser = async (id) => {
 };
 
 // Verificar se um e-mail ou nome de usuário já existe
-const findExistingUser = async ({ email, user }) => {
-  return prisma.user.findFirst({
+const findExistingUser = async (email, user) => {
+  return await prisma.user.findFirst({
     where: { OR: [{ email }, { user }] },
   });
 };
+
 module.exports = {
     getUserById,
     createUser,

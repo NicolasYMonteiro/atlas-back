@@ -7,16 +7,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model user {
   id       Int     @id @default(autoincrement())
   name     String
   user     String
   email    String
   password String
-  tasks    Task[]
+  tasks    task[]
 }
 
-model Task {
+model task {
   id           Int           @id @default(autoincrement())
   title        String
   description  String
@@ -28,9 +28,11 @@ model Task {
   multiple     Boolean
   dateCreator  DateTime
   idUser       Int
-  user         User          @relation(fields: [idUser], references: [id])
+  user         user          @relation(fields: [idUser], references: [id])
   multipleTask multipleTask[]
   recordTask   recordTask[]
+  taskCompletion taskCompletion[]
+  
 }
 
 model multipleTask {
@@ -38,19 +40,19 @@ model multipleTask {
   idTask  Int
   title   String
   verif   String
-  task    Task @relation(fields: [idTask], references: [id])
+  task    task @relation(fields: [idTask], references: [id])
 }
 
 model recordTask {
   id      Int    @id @default(autoincrement())
   idTask  Int
   record  Bytes
-  task    Task   @relation(fields: [idTask], references: [id])
+  task    task   @relation(fields: [idTask], references: [id])
 }
 
-model TaskCompletion {
+model taskCompletion {
   id         Int      @id @default(autoincrement()) 
   taskId     Int                                 
-  task       Task     @relation(fields: [taskId], references: [id]) 
+  task       task     @relation(fields: [taskId], references: [id]) 
   completion DateTime @default(now())   
 }
