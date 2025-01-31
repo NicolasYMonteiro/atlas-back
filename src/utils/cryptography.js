@@ -16,7 +16,7 @@ async function compararCripto(password, hash) {
         const result = await bcrypt.compare(password, hash);
         return result;
     }catch (error) {
-        console.error("Erro ao fazer login");
+        throw err;
     };
 };
   

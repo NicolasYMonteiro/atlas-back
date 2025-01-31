@@ -1,13 +1,4 @@
-/**
-model user {
-  id       Int     @id @default(autoincrement())
-  name     String
-  user     String
-  email    String
-  password String
-  tasks    task[]
-}
-*/
+const repositoriesUser = require('../repositories/user');
 
 const validationEmail = async (email) => {
     const regex = /^[a-zA-Z0-9]{4,}@[a-zA-Z0-9]{3,}\.[a-zA-Z]{2,}$/;
@@ -15,4 +6,13 @@ const validationEmail = async (email) => {
     return regex.test(email);
 }
 
-module.exports = { validationEmail };
+// Buscar uma task pelo ID
+const findUserIdByTask = async (id) => {
+    const user = await repositoriesUser.getUserById(id);
+    if (!user) {
+      throw new Error('Usuário não encontrado');
+    }
+    return user;
+};
+
+module.exports = { validationEmail, findUserIdByTask };
