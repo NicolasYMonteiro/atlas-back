@@ -2,14 +2,15 @@
 
 const { prisma } = require('../prismaClient');
 
-const getById = async (id) => {
-    return await prisma.task.findUnique({
-        where: { id },
+const getById = async (idUser) => {
+    return await prisma.task.findMany({
+        where: { idUser },
         include: { multipleTask: true }
     })
 }
 
 const createTask = async (data) => {
+    console.log("data repositories: ", data)
     return await prisma.task.create({
         data,
         include: { multipleTask: true }

@@ -4,9 +4,9 @@ const repositories = require('../repositories/task');
 const validations = require('../utils/validations');
 
 // Buscar uma task pelo ID
-const findTaskById = async (idUser, id) => {
+const findTaskById = async (idUser) => {
     await validations.findUserIdByTask(idUser); // valida se o usuário existe 
-    return await repositories.getById(id);
+    return await repositories.getById(idUser);
 };
 
 const createTask = async (data) => {

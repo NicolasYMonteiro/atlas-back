@@ -4,8 +4,8 @@ const services = require('../services/task');
 
 const getTask = async (req, res) => {
   try {
-    let idUser = 1; // vai ser substituido mais tarde pelo ID obtido no token
-    const task = await services.findTaskById(parseInt(idUser), parseInt(req.params.id));
+    const tokenUserId = req.user?.id;
+    const task = await services.findTaskById(tokenUserId);
     res.status(200).json(task);
   } catch (error) {
     res.status(404).json({ error: error.message });

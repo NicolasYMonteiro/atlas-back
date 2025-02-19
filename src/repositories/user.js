@@ -1,3 +1,5 @@
+// src/repositories/repositories.js
+
 const { prisma } = require('../prismaClient');
 
 // get by id
@@ -30,17 +32,32 @@ const deleteUser = async (id) => {
   });
 };
 
-// Verificar se um e-mail ou nome de usuário já existe
+// Verificar se um email ou nome de usuário já existe
 const findExistingUser = async (email, user) => {
   return await prisma.user.findFirst({
     where: { OR: [{ email }, { user }] },
   });
 };
 
+// Busca o usuário pelo email
+const findUserByEmail = async (email) => {
+  const user = await prisma.user.findFirst({
+    where: { email },
+    include: { tasks: true }
+  });
+
+  if (!user) {
+    throw new Error('Email não cadastrado');
+  }
+
+  return user;
+};
+
 module.exports = {
-    getUserById,
-    createUser,
-    updateUser,
-    deleteUser,
-    findExistingUser
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+  findExistingUser,
+  findUserByEmail
 };

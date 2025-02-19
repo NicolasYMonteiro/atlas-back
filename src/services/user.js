@@ -1,7 +1,10 @@
 // src/services/userService.js
+
 const userRepository = require('../repositories/user');
 const validations = require('../utils/validations')
 const cryptography = require('../utils/cryptography');
+const bcrypt = require('bcrypt');
+
 
 // Buscar um usuário pelo ID
 const findUserById = async (id) => {
@@ -55,5 +58,17 @@ const updateUser = async (id, data) => {
   return userRepository.updateUser(id, data);
 };
 
+const login = async (email, senha) => {
+  const user = await userRepository.findUserByEmail(email);
 
-module.exports = { findUserById, registerUser, updateUser };
+  const senhaCorreta = await bcrypt.compare(senha, user.password);
+
+  if (!senhaCorreta) {
+    throw new Error('Senha incorreta');
+  }
+
+  return user;
+};
+
+
+module.exports = { findUserById, registerUser, updateUser, login };
