@@ -42,6 +42,9 @@ const updateTask = async (id, data) => {
 }
 
 const removeTask = async (id) => {
+    await prisma.taskCompletion.deleteMany({
+        where: { taskId: id }
+    });
     await prisma.multipleTask.deleteMany({
         where: { idTask: id }
     });
