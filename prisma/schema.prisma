@@ -23,7 +23,7 @@ model task {
   emergency    Boolean
   periodical   Boolean
   date         DateTime
-  interval     String
+  interval     Int
   hour         String
   multiple     Boolean
   dateCreator  DateTime
@@ -36,10 +36,10 @@ model task {
 }
 
 model multipleTask {
-  id      Int  @id
+  id      Int     @id @default(autoincrement())
   idTask  Int
   title   String
-  verif   String
+  verif   Boolean
   task    task @relation(fields: [idTask], references: [id])
 }
 
